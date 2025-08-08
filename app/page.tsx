@@ -45,13 +45,13 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 animate-slide-in-up" style={{ animationDelay: '0.3s' }}>
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transition-transform hover:scale-105 w-full sm:w-auto">
-                <Link href="/demo">
-                  <Icons.search className="mr-2 h-5 w-5" /> Try Demo
+                <Link href="/demo-static">
+                  <Icons.search className="mr-2 h-5 w-5" /> Interactive Demo
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/10 hover:text-accent shadow-lg transition-transform hover:scale-105 w-full sm:w-auto">
-                <Link href="/dashboard">
-                  <Icons.users className="mr-2 h-5 w-5" /> Dashboard
+                <Link href="/demo-static">
+                  <Icons.brain className="mr-2 h-5 w-5" /> Explore Features
                 </Link>
               </Button>
             </div>
