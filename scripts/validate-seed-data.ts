@@ -278,7 +278,7 @@ function testHelperFunctions() {
         colorLog('red', `❌ ${test.name}: FAIL`);
       }
     } catch (error) {
-      colorLog('red', `❌ ${test.name}: ERROR - ${error.message}`);
+      colorLog('red', `❌ ${test.name}: ERROR - ${error instanceof Error ? error.message : error}`);
     }
   });
   
@@ -388,7 +388,7 @@ function main() {
         passedValidations++;
       }
     } catch (error) {
-      colorLog('red', `❌ ${validation.name} validation failed: ${error.message}`);
+      colorLog('red', `❌ ${validation.name} validation failed: ${error instanceof Error ? error.message : error}`);
     }
   });
   

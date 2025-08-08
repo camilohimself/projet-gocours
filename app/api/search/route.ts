@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 import { Subject } from '@/src/types';
+import { Prisma } from '@prisma/client';
 
 export async function GET(request: NextRequest) {
   try {
@@ -19,7 +20,7 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Build where clause for tutors
-    const where: any = {
+    const where: Prisma.TutorProfileWhereInput = {
       hourlyRate: {
         gte: minPrice,
         lte: maxPrice
@@ -225,7 +226,7 @@ export async function POST(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Build complex where clause
-    const where: any = {};
+    const where: Prisma.TutorProfileWhereInput = {};
     
     // Apply filters
     if (filters.subjects?.length) {
@@ -310,7 +311,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Build sort options
-    const orderBy: any = {};
+    const orderBy: Prisma.TutorProfileOrderByWithRelationInput = {};
     switch (sortBy) {
       case 'rating':
         orderBy.averageRating = sortOrder;

@@ -3,6 +3,19 @@ import { auth } from '@clerk/nextjs/server';
 import { prisma } from '@/app/lib/prisma';
 import { BookingStatus, Role } from '@/src/types';
 
+interface DashboardData {
+  user: {
+    id: string;
+    clerkId: string;
+    displayName: string | null;
+    email: string | null;
+    photoUrl?: string | null;
+    role: string;
+    createdAt: Date;
+  };
+  [key: string]: unknown;
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { userId } = await auth();
@@ -29,7 +42,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    let dashboardData: any = {
+    let dashboardData: DashboardData = {
       user: {
         id: userProfile.id,
         clerkId: userProfile.clerkId,

@@ -23,10 +23,10 @@ export default function Footer() {
       { name: 'Careers', href: '/careers' },
     ],
     social: [
-      { name: 'Facebook', href: '#', icon: Icons.facebook },
-      { name: 'Twitter', href: '#', icon: Icons.twitter },
-      { name: 'LinkedIn', href: '#', icon: Icons.linkedin },
-      { name: 'Instagram', href: '#', icon: Icons.instagram },
+      { name: 'Facebook', href: '#', icon: Icons.star },
+      { name: 'Twitter', href: '#', icon: Icons.star },
+      { name: 'LinkedIn', href: '#', icon: Icons.star },
+      { name: 'Instagram', href: '#', icon: Icons.star },
     ],
   };
 

@@ -329,7 +329,7 @@ export default function TutorsPage() {
             <TutorGrid
               tutors={data?.tutors || []}
               loading={loading}
-              error={error}
+              error={error || undefined}
               onFavoriteToggle={handleFavoriteToggle}
               favorites={favorites}
               pagination={data?.pagination}

@@ -403,7 +403,7 @@ export default function TutorDetailPage() {
                 <div className="flex flex-wrap gap-2">
                   {subjects.map((subject, index) => (
                     <Badge key={index} variant="secondary" className="text-sm py-2 px-3">
-                      {subject.name}
+                      {(subject as any).name || subject}
                     </Badge>
                   ))}
                 </div>
@@ -435,7 +435,7 @@ export default function TutorDetailPage() {
               </CardHeader>
               <CardContent>
                 <ReviewsList
-                  reviews={reviews}
+                  reviews={reviews as any}
                   loading={loadingReviews}
                   showPagination={true}
                   onLoadMore={loadMoreReviews}

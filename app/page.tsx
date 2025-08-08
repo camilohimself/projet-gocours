@@ -51,7 +51,7 @@ export default function HomePage() {
               </Button>
               <Button asChild variant="outline" size="lg" className="border-accent text-accent hover:bg-accent/10 hover:text-accent shadow-lg transition-transform hover:scale-105 w-full sm:w-auto">
                 <Link href="/dashboard">
-                  <Icons.user className="mr-2 h-5 w-5" /> Dashboard
+                  <Icons.users className="mr-2 h-5 w-5" /> Dashboard
                 </Link>
               </Button>
             </div>

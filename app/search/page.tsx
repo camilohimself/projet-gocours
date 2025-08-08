@@ -166,7 +166,7 @@ export default function SearchPage() {
       const cleanedFilters = Object.fromEntries(
         Object.entries(requestBody.filters).filter(([, value]) => value !== undefined)
       );
-      requestBody.filters = cleanedFilters;
+      requestBody.filters = cleanedFilters as typeof requestBody.filters;
 
       const response = await fetch('/api/search', {
         method: 'POST',
@@ -560,7 +560,7 @@ export default function SearchPage() {
             <TutorGrid
               tutors={data?.tutors || []}
               loading={loading}
-              error={error}
+              error={error || undefined}
               onFavoriteToggle={handleFavoriteToggle}
               favorites={favorites}
               pagination={data?.pagination}

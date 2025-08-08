@@ -197,12 +197,10 @@ export async function POST(request: NextRequest) {
     }
     
     // Check existing favorite
-    const existingFavorite = await prisma.favorite.findUnique({
+    const existingFavorite = await prisma.favorite.findFirst({
       where: {
-        userId_tutorId: {
-          userId: user.id,
-          tutorId: tutorId
-        }
+        userId: user.id,
+        tutorId: tutorId
       }
     });
     
@@ -252,12 +250,10 @@ export async function POST(request: NextRequest) {
         );
       }
       
-      await prisma.favorite.delete({
+      await prisma.favorite.deleteMany({
         where: {
-          userId_tutorId: {
-            userId: user.id,
-            tutorId: tutorId
-          }
+          userId: user.id,
+          tutorId: tutorId
         }
       });
       
@@ -267,12 +263,10 @@ export async function POST(request: NextRequest) {
     } else { // action === 'toggle'
       if (existingFavorite) {
         // Remove favorite
-        await prisma.favorite.delete({
+        await prisma.favorite.deleteMany({
           where: {
-            userId_tutorId: {
-              userId: user.id,
-              tutorId: tutorId
-            }
+            userId: user.id,
+            tutorId: tutorId
           }
         });
         
@@ -389,10 +383,8 @@ export async function DELETE(request: NextRequest) {
       };
     } else {
       whereClause = {
-        userId_tutorId: {
-          userId: user.id,
-          tutorId: tutorId!
-        }
+        userId: user.id,
+        tutorId: tutorId!
       };
     }
     

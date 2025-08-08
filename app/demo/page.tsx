@@ -1,4 +1,4 @@
-import DemoTutorsPage from '@/src/components/demo/DemoTutorsPage';
+import { DemoTutorsPage } from '@/src/components/demo/DemoTutorsPage';
 import { DemoDataProvider } from '@/src/components/demo/DemoDataProvider';
 
 export const metadata = {

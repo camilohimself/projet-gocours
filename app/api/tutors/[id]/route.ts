@@ -5,10 +5,11 @@ import { TutorService } from '@/src/lib/prisma-helpers';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tutorId = params.id;
+    const resolvedParams = await params;
+    const tutorId = resolvedParams.id;
     
     if (!tutorId) {
       return NextResponse.json(
@@ -53,7 +54,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { userId } = await auth();
@@ -68,7 +69,8 @@ export async function PUT(
       );
     }
     
-    const tutorId = params.id;
+    const resolvedParams = await params;
+    const tutorId = resolvedParams.id;
     const body = await request.json();
     
     if (!tutorId) {
@@ -193,7 +195,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { userId } = await auth();
@@ -208,7 +210,8 @@ export async function DELETE(
       );
     }
     
-    const tutorId = params.id;
+    const resolvedParams = await params;
+    const tutorId = resolvedParams.id;
     
     if (!tutorId) {
       return NextResponse.json(

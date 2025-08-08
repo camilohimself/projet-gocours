@@ -5,7 +5,7 @@ import { BookingStatus } from '@/src/types';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { userId } = await auth();
@@ -16,8 +16,9 @@ export async function GET(
       );
     }
 
+    const resolvedParams = await params;
     const booking = await prisma.booking.findUnique({
-      where: { id: params.id },
+      where: { id: resolvedParams.id },
       include: {
         student: {
           select: {
@@ -88,7 +89,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { userId } = await auth();
@@ -100,10 +101,11 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { status, sessionNotes } = body;
+    const { status, sessionNotes }: { status?: BookingStatus; sessionNotes?: string } = body;
 
+    const resolvedParams = await params;
     const booking = await prisma.booking.findUnique({
-      where: { id: params.id },
+      where: { id: resolvedParams.id },
       include: {
         tutor: {
           include: {
@@ -144,11 +146,11 @@ export async function PUT(
     }
 
     // Business logic for status changes
-    const updates: any = {};
+    const updates: { status?: BookingStatus; sessionNotes?: string } = {};
     
     if (status) {
       // Validate status transitions
-      const validTransitions = {
+      const validTransitions: Record<BookingStatus, BookingStatus[]> = {
         [BookingStatus.PENDING]: [BookingStatus.CONFIRMED, BookingStatus.CANCELLED],
         [BookingStatus.CONFIRMED]: [BookingStatus.COMPLETED, BookingStatus.CANCELLED, BookingStatus.NO_SHOW],
         [BookingStatus.COMPLETED]: [], // Cannot change completed bookings
@@ -179,7 +181,7 @@ export async function PUT(
     }
 
     const updatedBooking = await prisma.booking.update({
-      where: { id: params.id },
+      where: { id: resolvedParams.id },
       data: updates,
       include: {
         student: {
@@ -220,7 +222,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { userId } = await auth();
@@ -231,8 +233,9 @@ export async function DELETE(
       );
     }
 
+    const resolvedParams = await params;
     const booking = await prisma.booking.findUnique({
-      where: { id: params.id },
+      where: { id: resolvedParams.id },
       include: {
         tutor: {
           include: {
@@ -280,7 +283,7 @@ export async function DELETE(
     }
 
     await prisma.booking.delete({
-      where: { id: params.id }
+      where: { id: resolvedParams.id }
     });
 
     return NextResponse.json({

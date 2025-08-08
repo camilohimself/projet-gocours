@@ -129,7 +129,7 @@ export function TutorCard({
           <div className="flex flex-wrap gap-1 mb-3">
             {subjects.slice(0, 3).map((subject, index) => (
               <Badge key={index} variant="secondary" className="text-xs">
-                {subject.name}
+                {(subject as any).name || subject}
               </Badge>
             ))}
             {subjects.length > 3 && (

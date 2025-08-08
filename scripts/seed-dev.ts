@@ -189,7 +189,7 @@ async function validateSeededData(): Promise<void> {
         const tutorWithSubjects = await prisma.tutorProfile.findFirst({
           include: { subjects: true },
         });
-        return tutorWithSubjects?.subjects.length > 0;
+        return (tutorWithSubjects?.subjects?.length ?? 0) > 0;
       },
     },
     {
@@ -229,7 +229,7 @@ async function validateSeededData(): Promise<void> {
         colorLog('red', `❌ ${checkItem.name} ${progressBar}`);
       }
     } catch (error) {
-      colorLog('red', `❌ Error checking ${checkItem.name}: ${error.message}`);
+      colorLog('red', `❌ Error checking ${checkItem.name}: ${error instanceof Error ? error.message : error}`);
     }
   }
   

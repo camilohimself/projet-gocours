@@ -456,3 +456,5 @@ export function DemoTutorsPage() {
     </div>
   );
 }
+
+export default DemoTutorsPage;

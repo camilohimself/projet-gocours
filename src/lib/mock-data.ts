@@ -438,7 +438,6 @@ export function generateMockTutors(): Array<TutorProfile & {
       headline: profile.headline,
       bio: profile.bio,
       teachingLevels: profile.teachingLevels,
-      subjects: profile.subjects as Subject[],
       languages: profile.languages,
       hourlyRate: profile.hourlyRate,
       teachingFormats: profile.teachingFormats,
@@ -464,7 +463,7 @@ export function generateMockTutors(): Array<TutorProfile & {
       subjects: subjectObjects,
       reviews: generateMockReviewsForTutor(index + 1, reviewCount, averageRating),
     };
-  });
+  }) as any;
 }
 
 // Generate mock reviews for a tutor

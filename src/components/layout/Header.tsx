@@ -18,8 +18,8 @@ export default function Header() {
   ];
 
   const userNavigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: Icons.user },
-    { name: 'My Bookings', href: '/bookings', icon: Icons.calendar },
+    { name: 'Dashboard', href: '/dashboard', icon: Icons.users },
+    { name: 'My Bookings', href: '/bookings', icon: Icons.calendarDays },
     { name: 'Favorites', href: '/favorites', icon: Icons.heart },
   ];
 

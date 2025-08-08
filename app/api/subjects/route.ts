@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { SubjectService } from '@/src/lib/prisma-helpers';
 import { prisma } from '@/app/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 export async function GET(request: NextRequest) {
   try {
@@ -12,7 +13,7 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search');
     
     // Build where clause
-    const where: any = {};
+    const where: Prisma.SubjectWhereInput = {};
     if (category) {
       where.category = {
         equals: category,
@@ -62,7 +63,7 @@ export async function GET(request: NextRequest) {
         tutorCount: subject._count.tutors
       });
       return acc;
-    }, {} as Record<string, any[]>);
+    }, {} as Record<string, Array<typeof subjects[0] & { tutorCount: number }>>);
     
     return NextResponse.json({
       success: true,

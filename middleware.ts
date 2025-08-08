@@ -10,10 +10,14 @@ const isProtectedRoute = createRouteMatcher([
   // '/profile(.*)',
 ]);
 
-export default clerkMiddleware((auth, req) => {
+export default clerkMiddleware(async (auth, req) => {
   // Si la route est une route protégée, appliquez la protection.
   if (isProtectedRoute(req)) {
-    auth().protect(); // Si l'utilisateur n'est pas authentifié, il sera redirigé vers la page de connexion.
+    const authResult = await auth();
+    if (!authResult.userId) {
+      // Redirect to sign-in if not authenticated
+      return Response.redirect(new URL('/sign-in', req.url));
+    }
   }
 
   // Vous pouvez ajouter d'autres logiques ici si nécessaire pour des routes spécifiques.
