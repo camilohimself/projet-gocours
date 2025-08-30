@@ -17,9 +17,9 @@ import {
   Award,
   MessageCircle
 } from 'lucide-react'
-import { PrestigeDisplay } from '@/components/gamification/PrestigeDisplay'
-import { AchievementCard } from '@/components/gamification/AchievementCard'
-import { UserProgress, TUTOR_ACHIEVEMENTS } from '@/types/gamification'
+import { PrestigeDisplay } from '../../components/gamification/PrestigeDisplay'
+import { AchievementCard } from '../../components/gamification/AchievementCard'
+import { UserProgress, TUTOR_ACHIEVEMENTS } from '../../types/gamification'
 
 // Mock data - à remplacer par Supabase
 const mockProgress: UserProgress = {
