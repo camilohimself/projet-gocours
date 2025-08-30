@@ -1,0 +1,182 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserProfile {
+  id          String   @id @default(cuid())
+  clerkId     String   @unique
+  role        Role
+  displayName String?
+  email       String?
+  photoUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  tutorProfile   TutorProfile?
+  studentProfile StudentProfile?
+  reviewsGiven   Review[]       @relation("ReviewAuthor")
+  reviewsReceived Review[]      @relation("ReviewRecipient")
+  bookings       Booking[]
+  favorites      Favorite[]
+
+  @@map("user_profiles")
+}
+
+model TutorProfile {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  headline         String
+  bio              String
+  teachingLevels   String[] // ["Primary", "Secondary", "University", etc.]
+  subjects         Subject[] @relation("TutorSubjects")
+  languages        String[] // ["English", "French", "Spanish"]
+  hourlyRate       Float
+  teachingFormats  String[] // ["Online", "InPerson", "Both"]
+  isVerified       Boolean  @default(false)
+  averageRating    Float    @default(0.0)
+  reviewCount      Int      @default(0)
+  
+  // Location (replacing GeoPoint)
+  locationCity     String?
+  locationLat      Float?
+  locationLng      Float?
+  
+  // Availability
+  responseTime     String? // "Within 1 hour", "Within 24 hours"
+  qualifications   String[]
+  experienceYears  Int?
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  user             UserProfile @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviews          Review[]    @relation("TutorReviews")
+  bookings         Booking[]
+  favorites        Favorite[]
+  availability     AvailabilitySlot[]
+
+  @@map("tutor_profiles")
+}
+
+model StudentProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  learningGoals  String?
+  preferredLevel String?
+  budget         Float?
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  user           UserProfile @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("student_profiles")
+}
+
+model Subject {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  category    String?  // "Science", "Language", "Math", etc.
+  description String?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  tutors      TutorProfile[] @relation("TutorSubjects")
+
+  @@map("subjects")
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  rating     Float    // 1.0 to 5.0
+  comment    String?
+  authorId   String
+  recipientId String
+  tutorId    String
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  author     UserProfile  @relation("ReviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  recipient  UserProfile  @relation("ReviewRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  tutor      TutorProfile @relation("TutorReviews", fields: [tutorId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
+
+model Booking {
+  id            String      @id @default(cuid())
+  studentId     String
+  tutorId       String
+  subject       String
+  scheduledAt   DateTime
+  duration      Int         // in minutes
+  status        BookingStatus @default(PENDING)
+  totalAmount   Float
+  sessionNotes  String?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  student       UserProfile  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  tutor         TutorProfile @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+
+  @@map("bookings")
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  tutorId   String
+  
+  createdAt DateTime @default(now())
+
+  // Relations
+  user      UserProfile  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tutor     TutorProfile @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, tutorId])
+  @@map("favorites")
+}
+
+model AvailabilitySlot {
+  id       String   @id @default(cuid())
+  tutorId  String
+  dayOfWeek String  // "Monday", "Tuesday", etc.
+  timeSlot  String  // "Morning", "Afternoon", "Evening"
+  isActive  Boolean @default(true)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  tutor     TutorProfile @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+
+  @@map("availability_slots")
+}
+
+enum Role {
+  tutor
+  student
+  admin
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}

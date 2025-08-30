@@ -1,158 +1,227 @@
-export interface User {
+// GoCours Types - Adapted for Prisma/PostgreSQL
+// Replaces Firebase types with SQL equivalents
+
+export enum Subject {
+  Math = "Math",
+  Mathematics = "Mathematics", 
+  Physics = "Physics",
+  Chemistry = "Chemistry",
+  Biology = "Biology",
+  English = "English",
+  French = "French",
+  German = "German",
+  History = "History",
+  ComputerScience = "Computer Science",
+  MusicTheory = "Music Theory", 
+  ArtHistory = "Art History",
+  Economics = "Economics",
+  Geography = "Geography",
+}
+export const AllSubjects = Object.values(Subject);
+
+export enum LocationPreference {
+  Online = "Online",
+  InPerson = "In-Person", 
+  Both = "Both",
+}
+export const AllLocationPreferences = Object.values(LocationPreference);
+
+export enum TeachingLevel {
+  Primary = "Primary",
+  Secondary = "Secondary", 
+  University = "University",
+  Adult = "Adult",
+  Professional = "Professional",
+}
+export const AllTeachingLevels = Object.values(TeachingLevel);
+
+export enum BookingStatus {
+  PENDING = "PENDING",
+  CONFIRMED = "CONFIRMED",
+  COMPLETED = "COMPLETED", 
+  CANCELLED = "CANCELLED",
+  NO_SHOW = "NO_SHOW",
+}
+
+export enum Role {
+  tutor = "tutor",
+  student = "student",
+  admin = "admin",
+}
+
+// Location type (replaces Firebase GeoPoint)
+export type Location = {
+  city: string;
+  lat?: number;
+  lng?: number;
+};
+
+// Availability slot type
+export type AvailabilitySlot = {
   id: string;
-  email: string;
-  role: 'student' | 'tutor' | 'admin';
+  dayOfWeek: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
+  timeSlot: "Morning" | "Afternoon" | "Evening";
+  isActive: boolean;
+};
+
+// Core User Profile (from Prisma)
+export type UserProfile = {
+  id: string;
+  clerkId: string;
+  role: Role;
+  displayName?: string;
+  email?: string;
+  photoUrl?: string;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
-export interface TutorProfile extends User {
-  firstName: string;
-  lastName: string;
+// Tutor Profile (adapted from Firebase to Prisma)
+export type TutorProfile = {
+  id: string;
+  userId: string;
+  headline: string;
+  bio: string;
+  teachingLevels: string[];
+  subjects: Subject[];
+  languages: string[];
+  hourlyRate: number;
+  teachingFormats: string[];
+  isVerified: boolean;
+  averageRating: number;
+  reviewCount: number;
+  
+  // Location (replaces GeoPoint)
+  location?: Location;
+  
+  // Additional fields
+  responseTime?: string;
+  qualifications: string[];
+  experienceYears?: number;
+  
+  createdAt: Date;
+  updatedAt: Date;
+  
+  // Relations (optional for API responses)
+  user?: UserProfile;
+  reviews?: Review[];
+  availability?: AvailabilitySlot[];
+};
+
+// Student Profile
+export type StudentProfile = {
+  id: string;
+  userId: string;
+  learningGoals?: string;
+  preferredLevel?: string;
+  budget?: number;
+  
+  createdAt: Date;
+  updatedAt: Date;
+  
+  // Relations
+  user?: UserProfile;
+};
+
+// Review type
+export type Review = {
+  id: string;
+  rating: number;
+  comment?: string;
+  authorId: string;
+  recipientId: string;
+  tutorId: string;
+  
+  createdAt: Date;
+  updatedAt: Date;
+  
+  // Relations
+  author?: UserProfile;
+  recipient?: UserProfile;
+  tutor?: TutorProfile;
+};
+
+// Booking type
+export type Booking = {
+  id: string;
+  studentId: string;
+  tutorId: string;
+  subject: string;
+  scheduledAt: Date;
+  duration: number;
+  status: BookingStatus;
+  totalAmount: number;
+  sessionNotes?: string;
+  
+  createdAt: Date;
+  updatedAt: Date;
+  
+  // Relations
+  student?: UserProfile;
+  tutor?: TutorProfile;
+};
+
+// Favorite type
+export type Favorite = {
+  id: string;
+  userId: string;
+  tutorId: string;
+  createdAt: Date;
+  
+  // Relations
+  user?: UserProfile;
+  tutor?: TutorProfile;
+};
+
+// Legacy types for backward compatibility during migration
+export type LegacyAvailabilitySlot = {
+  day: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
+  time: "Morning" | "Afternoon" | "Evening";
+};
+
+export type LegacyTutor = {
+  id: string;
+  name: string;
+  headline: string;
+  avatarUrl?: string;
   bio: string;
   subjects: Subject[];
-  languages: Language[];
-  hourlyRate: number;
-  experience: number; // years
-  education: Education[];
-  availability: Availability[];
+  pricePerHour: number;
+  experienceYears: number;
+  locationPreference: LocationPreference;
+  availability: LegacyAvailabilitySlot[];
   rating: number;
-  reviewCount: number;
-  verificationStatus: 'pending' | 'verified' | 'rejected';
-  teachingStyle: TeachingStyle;
-  knowledgeGraph?: KnowledgeNode[];
-}
+  reviewsCount: number;
+  isFavorite?: boolean;
+  contact?: {
+    email?: string;
+    phone?: string;
+  };
+  qualifications?: string[];
+  responseTime?: string;
+};
 
-export interface StudentProfile extends User {
-  firstName: string;
-  lastName: string;
-  grade?: string;
-  learningGoals: string[];
-  preferredSubjects: Subject[];
-  learningStyle: LearningStyle;
-  knowledgeGraph?: KnowledgeNode[];
-}
+// API Response types
+export type TutorSearchFilters = {
+  subjects?: Subject[];
+  priceRange?: [number, number];
+  location?: string;
+  teachingFormats?: string[];
+  rating?: number;
+  availability?: {
+    day: string;
+    time: string;
+  };
+};
 
-export interface Subject {
-  id: string;
-  name: string;
-  category: 'mathematics' | 'sciences' | 'languages' | 'arts' | 'technology' | 'other';
-  level: 'primary' | 'secondary' | 'high-school' | 'university' | 'professional';
-}
+export type TutorSearchResult = {
+  tutors: TutorProfile[];
+  totalCount: number;
+  filters: TutorSearchFilters;
+};
 
-export interface Language {
-  code: string;
-  name: string;
-  proficiency: 'native' | 'fluent' | 'intermediate' | 'basic';
-}
-
-export interface Education {
-  degree: string;
-  institution: string;
-  year: number;
-  field: string;
-}
-
-export interface Availability {
-  dayOfWeek: number; // 0-6
-  startTime: string; // HH:mm
-  endTime: string; // HH:mm
-  timezone: string;
-}
-
-export interface Session {
-  id: string;
-  tutorId: string;
-  studentId: string;
-  subjectId: string;
-  scheduledAt: Date;
-  duration: number; // minutes
-  status: 'scheduled' | 'in-progress' | 'completed' | 'cancelled';
-  price: number;
-  meetingUrl?: string;
-  notes?: string;
-  aiInsights?: AISessionInsights;
-}
-
-export interface Review {
-  id: string;
-  sessionId: string;
-  studentId: string;
-  tutorId: string;
-  rating: number; // 1-5
-  comment: string;
-  createdAt: Date;
-}
-
-// AI-specific types
-export interface KnowledgeNode {
-  id: string;
-  subject: string;
-  concept: string;
-  mastery: number; // 0-100
-  connections: string[]; // IDs of connected nodes
-  lastUpdated: Date;
-}
-
-export interface TeachingStyle {
-  approach: 'visual' | 'auditory' | 'kinesthetic' | 'mixed';
-  pace: 'slow' | 'moderate' | 'fast' | 'adaptive';
-  structure: 'structured' | 'flexible' | 'exploratory';
-}
-
-export interface LearningStyle {
-  preference: 'visual' | 'auditory' | 'reading' | 'kinesthetic';
-  pace: 'slow' | 'moderate' | 'fast';
-  interaction: 'high' | 'medium' | 'low';
-}
-
-export interface AIMatchScore {
-  overall: number; // 0-100
-  styleCompatibility: number;
-  subjectExpertise: number;
-  availabilityMatch: number;
-  priceMatch: number;
-  personalityFit: number;
-  predictedSuccess: number;
-  reasoning: string[];
-}
-
-export interface AISessionInsights {
-  summary: string;
-  keyConceptsCovered: string[];
-  studentEngagement: number; // 0-100
-  comprehensionLevel: number; // 0-100
-  recommendations: string[];
-  nextSteps: string[];
-  generatedQuestions: Question[];
-}
-
-export interface Question {
-  id: string;
-  text: string;
-  difficulty: 'easy' | 'medium' | 'hard';
-  concept: string;
-  correctAnswer?: string;
-  explanation?: string;
-}
-
-export interface LearningPath {
-  id: string;
-  studentId: string;
-  goal: string;
-  milestones: Milestone[];
-  currentProgress: number; // 0-100
-  estimatedCompletion: Date;
-  recommendedTutors: string[];
-  aiGenerated: boolean;
-}
-
-export interface Milestone {
-  id: string;
-  title: string;
-  description: string;
-  requiredSessions: number;
-  completedSessions: number;
-  concepts: string[];
-  status: 'pending' | 'in-progress' | 'completed';
-}
+// Constants
+export const AllDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] as const;
+export const AllTimes = ["Morning", "Afternoon", "Evening"] as const;
+export const AllLanguages = ["English", "French", "Spanish", "German", "Italian", "Portuguese", "Mandarin", "Arabic"] as const;
+export const AllTeachingFormats = ["Online", "InPerson", "Both"] as const;
