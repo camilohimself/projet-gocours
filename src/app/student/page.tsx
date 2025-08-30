@@ -18,9 +18,9 @@ import {
   Trophy,
   Flame
 } from 'lucide-react'
-import { PrestigeDisplay } from '@/components/gamification/PrestigeDisplay'
-import { AchievementCard } from '@/components/gamification/AchievementCard'
-import { UserProgress, PRESTIGE_LEVELS } from '@/types/gamification'
+import { PrestigeDisplay } from '../../components/gamification/PrestigeDisplay'
+import { AchievementCard } from '../../components/gamification/AchievementCard'
+import { UserProgress, PRESTIGE_LEVELS } from '../../types/gamification'
 
 // Mock data pour l'élève
 const mockStudentProgress: UserProgress = {

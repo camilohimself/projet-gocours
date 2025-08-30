@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Check, Crown, Zap, Star, Users, MessageCircle, BarChart3, Shield, Sparkles } from 'lucide-react'
-import { SUBSCRIPTION_TIERS, ONE_TIME_PURCHASES, formatPrice } from '@/lib/stripe/config'
+import { SUBSCRIPTION_TIERS, ONE_TIME_PURCHASES, formatPrice } from '../../lib/stripe/config'
 
 export default function PricingPage() {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly')

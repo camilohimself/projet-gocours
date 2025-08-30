@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Filter, Star, Clock, BookOpen, Users, ChevronDown, MapPin, Zap } from 'lucide-react'
-import { PrestigeDisplay } from '@/components/gamification/PrestigeDisplay'
-import { TutorProfile, Subject } from '@/types'
-import { PRESTIGE_LEVELS, UserProgress } from '@/types/gamification'
+import { PrestigeDisplay } from '../../components/gamification/PrestigeDisplay'
+import { TutorProfile, Subject } from '../../types'
+import { PRESTIGE_LEVELS, UserProgress } from '../../types/gamification'
 
 // Mock data - à remplacer par les vraies données Supabase
 const mockTutors: (TutorProfile & { progress: UserProgress })[] = [
