@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import { KnowledgeNode, LearningStyle, TeachingStyle, AISessionInsights } from '@/types';
+import { KnowledgeNode, LearningStyle, TeachingStyle, AISessionInsights } from '../../types';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

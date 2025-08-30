@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { UserProgress, getLevelFromXP, getXPToNextLevel } from '@/types/gamification'
+import { UserProgress, getLevelFromXP, getXPToNextLevel } from '../../types/gamification'
 
 interface PrestigeDisplayProps {
   progress: UserProgress

@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect } from 'react';
-import { mockTutors, mockReviews, mockSubjects } from '@/src/lib/mock-data';
-import type { TutorProfile, Review } from '@/src/types';
+import { mockTutors, mockReviews, mockSubjects } from '../../lib/mock-data';
+import type { TutorProfile, Review } from '../../types';
 
 // Enhanced tutor type for demo components
 export type DemoTutor = TutorProfile & {

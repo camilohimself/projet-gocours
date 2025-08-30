@@ -1,5 +1,5 @@
-import { DemoTutorsPage } from '@/src/components/demo/DemoTutorsPage';
-import { DemoDataProvider } from '@/src/components/demo/DemoDataProvider';
+import { DemoTutorsPage } from '../../src/components/demo/DemoTutorsPage';
+import { DemoDataProvider } from '../../src/components/demo/DemoDataProvider';
 
 export const metadata = {
   title: 'GoCours - Interactive Demo',

@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useAuth, UserButton } from '@clerk/nextjs';
-import { Button } from '@/src/components/ui/button';
-import { Icons } from '@/src/lib/icons';
-import GoCoursLogo from '@/src/components/icons/GoCoursLogo';
+import { Button } from '../ui/button';
+import { Icons } from '../../lib/icons';
+import GoCoursLogo from '../icons/GoCoursLogo';
 
 export default function Header() {
   const { isLoaded, userId } = useAuth();

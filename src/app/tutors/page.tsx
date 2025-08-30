@@ -5,10 +5,46 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Filter, Star, Clock, BookOpen, Users, ChevronDown, MapPin, Zap } from 'lucide-react'
 import { PrestigeDisplay } from '../../components/gamification/PrestigeDisplay'
 import { TutorProfile, Subject } from '../../types'
+
+// Type helper for mock data compatibility
+type SubjectWithDetails = {
+  id: string;
+  name: string;
+  category: string;
+  level: string;
+}
+
 import { PRESTIGE_LEVELS, UserProgress } from '../../types/gamification'
 
+// Mock tutor type for demo purposes
+type MockTutor = {
+  id: string;
+  email: string;
+  role: 'tutor';
+  firstName: string;
+  lastName: string;
+  bio: string;
+  subjects: SubjectWithDetails[];
+  languages: { code: string; name: string; proficiency: string; }[];
+  hourlyRate: number;
+  experience: number;
+  education: { degree: string; institution: string; year: number; field: string; }[];
+  availability: any[];
+  rating: number;
+  reviewCount: number;
+  verificationStatus: 'verified' | 'pending';
+  teachingStyle: {
+    approach: string;
+    pace: string;
+    structure: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+  progress: UserProgress;
+}
+
 // Mock data - à remplacer par les vraies données Supabase
-const mockTutors: (TutorProfile & { progress: UserProgress })[] = [
+const mockTutors: MockTutor[] = [
   {
     id: '1',
     email: 'marie@example.com',
@@ -185,7 +221,7 @@ export default function TutorsPage() {
   const [priceRange, setPriceRange] = useState([0, 150])
   const [tutors, setTutors] = useState(mockTutors)
 
-  const TutorCard = ({ tutor }: { tutor: TutorProfile & { progress: UserProgress } }) => {
+  const TutorCard = ({ tutor }: { tutor: MockTutor }) => {
     const prestigeLevel = PRESTIGE_LEVELS[tutor.progress.level - 1]
 
     return (

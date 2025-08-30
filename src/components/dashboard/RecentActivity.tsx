@@ -1,8 +1,8 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
-import { Badge } from '@/src/components/ui/badge';
-import { Button } from '@/src/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
 import { 
   Calendar, 
   User, 
@@ -12,7 +12,7 @@ import {
   ExternalLink,
   MessageSquare
 } from 'lucide-react';
-import { BookingStatus } from '@/src/types';
+import { BookingStatus } from '../../types';
 
 export type ActivityItem = {
   id: string;

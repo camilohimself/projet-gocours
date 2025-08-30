@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Achievement } from '@/types/gamification'
+import { Achievement } from '../../types/gamification'
 import { formatDistanceToNow } from 'date-fns'
 import { fr } from 'date-fns/locale'
 

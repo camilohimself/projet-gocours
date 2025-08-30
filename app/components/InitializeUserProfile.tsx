@@ -1,7 +1,7 @@
 // app/components/InitializeUserProfile.tsx
 'use client';
 
-import { useCreateUserProfile } from '@/app/hooks/useCreateUserProfile'; // Ou le chemin relatif correct si l'alias ne marche pas pour CE hook
+import { useCreateUserProfile } from '../hooks/useCreateUserProfile'; // Ou le chemin relatif correct si l'alias ne marche pas pour CE hook
 import { useEffect } from 'react';
 
 export default function InitializeUserProfile() {

@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { TutorGrid } from '@/src/components/tutors/TutorGrid';
-import { FilterSidebar, FilterState } from '@/src/components/tutors/FilterSidebar';
-import { Button } from '@/src/components/ui/button';
-import { Input } from '@/src/components/ui/input';
-import { Select } from '@/src/components/ui/select';
-import { Card, CardContent } from '@/src/components/ui/card';
+import { TutorGrid } from '../tutors/TutorGrid';
+import { FilterSidebar, FilterState } from '../tutors/FilterSidebar';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Select } from '../ui/select';
+import { Card, CardContent } from '../ui/card';
 import { useDemoData, DemoTutor } from './DemoDataProvider';
-import { getAvailableCities } from '@/src/lib/mock-data';
-import { Subject } from '@/src/types';
+import { getAvailableCities } from '../../lib/mock-data';
+import { Subject } from '../../types';
 
 // Sort options
 const SORT_OPTIONS = [

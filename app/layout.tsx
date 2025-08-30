@@ -1,7 +1,7 @@
 import './globals.css';
-import HeaderStatic from '@/src/components/layout/HeaderStatic';
-import Footer from '@/src/components/layout/Footer';
-import { Toaster } from '@/src/components/ui/toaster';
+import HeaderStatic from '../src/components/layout/HeaderStatic';
+import Footer from '../src/components/layout/Footer';
+import { Toaster } from '../src/components/ui/toaster';
 import { Poppins, PT_Sans } from 'next/font/google';
 
 const poppins = Poppins({

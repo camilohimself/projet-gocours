@@ -2,7 +2,7 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { currentUser } from '@clerk/nextjs/server';
 // MODIFIÉ: Nouveau chemin d'importation pour Prisma via l'alias
-import prisma from '@/app/lib/prisma'; 
+import prisma from '../../lib/prisma'; 
 
 enum Role {
   STUDENT = 'student',

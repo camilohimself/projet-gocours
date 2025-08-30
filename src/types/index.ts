@@ -99,6 +99,9 @@ export type TutorProfile = {
   qualifications: string[];
   experienceYears?: number;
   
+  // AI-related fields
+  teachingStyle?: TeachingStyle;
+  
   createdAt: Date;
   updatedAt: Date;
   
@@ -115,6 +118,9 @@ export type StudentProfile = {
   learningGoals?: string;
   preferredLevel?: string;
   budget?: number;
+  
+  // AI-related fields
+  learningStyle?: LearningStyle;
   
   createdAt: Date;
   updatedAt: Date;
@@ -218,6 +224,54 @@ export type TutorSearchResult = {
   tutors: TutorProfile[];
   totalCount: number;
   filters: TutorSearchFilters;
+};
+
+// AI & Knowledge Types (stubs for now)
+export type KnowledgeNode = {
+  id: string;
+  title: string;
+  prerequisites: string[];
+  children: string[];
+  difficulty: number;
+};
+
+export type LearningStyle = {
+  visual: number;
+  auditory: number;
+  kinesthetic: number;
+  readingWriting: number;
+  interaction?: 'low' | 'medium' | 'high';
+  pace?: 'slow' | 'normal' | 'fast';
+};
+
+export type TeachingStyle = {
+  interactive: number;
+  structured: number;
+  flexible: number;
+  supportive: number;
+  pace?: 'rigid' | 'adaptive' | 'flexible';
+  structure?: 'flexible' | 'structured' | 'mixed';
+};
+
+export type AISessionInsights = {
+  summary: string;
+  keyConceptsCovered: string[];
+  studentEngagement: number;
+  comprehensionLevel: number;
+  recommendations: string[];
+  nextSteps: string[];
+  generatedQuestions: string[];
+};
+
+export type AIMatchScore = {
+  overall: number;
+  styleCompatibility: number;
+  subjectExpertise: number;
+  availabilityMatch: number;
+  priceMatch: number;
+  personalityFit: number;
+  predictedSuccess: number;
+  reasoning: string;
 };
 
 // Constants

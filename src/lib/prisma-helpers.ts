@@ -1,5 +1,5 @@
-import { prisma } from '@/app/lib/prisma';
-import type { TutorProfile, TutorSearchFilters, Subject } from '@/src/types';
+import { prisma } from '../../app/lib/prisma';
+import type { TutorProfile, TutorSearchFilters, Subject } from '../types';
 
 export class TutorService {
   static async findTutors(filters?: TutorSearchFilters) {

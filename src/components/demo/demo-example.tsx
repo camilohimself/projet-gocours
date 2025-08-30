@@ -5,7 +5,7 @@
  * avec le DemoDataProvider pour fournir les données mock.
  */
 
-import { DemoDataProvider, DemoTutorsPage } from '@/src/components/demo';
+import { DemoDataProvider, DemoTutorsPage } from '../demo';
 
 // Exemple d'utilisation dans une page Next.js
 export default function TutorsDemo() {

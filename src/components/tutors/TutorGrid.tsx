@@ -1,9 +1,9 @@
 "use client";
 
 import React from 'react';
-import { TutorProfile } from '@/src/types';
+import { TutorProfile } from '../../types';
 import { TutorCard } from './TutorCard';
-import { Button } from '@/src/components/ui/button';
+import { Button } from '../ui/button';
 
 export interface TutorGridProps {
   tutors: Array<TutorProfile & {

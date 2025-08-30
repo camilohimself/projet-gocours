@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { mockTutors } from '@/src/lib/mock-data';
-import type { TutorSearchFilters } from '@/src/types';
+import { mockTutors } from '../../../../src/lib/mock-data';
+import type { TutorSearchFilters } from '../../../../src/types';
 
 export async function GET(request: NextRequest) {
   try {

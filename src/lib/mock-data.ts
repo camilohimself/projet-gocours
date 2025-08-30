@@ -404,7 +404,7 @@ export function generateRandomDate(daysAgo: number, daysAhead: number): Date {
 // MOCK DATA GENERATORS FOR DEMO
 // ===================================
 
-import { TutorProfile, Review, Subject, UserProfile } from '@/src/types';
+import { TutorProfile, Review, Subject, UserProfile } from '../types';
 
 // Generate mock tutors from the profile data
 export function generateMockTutors(): Array<TutorProfile & {

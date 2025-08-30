@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Review } from '@/src/types';
-import { Button } from '@/src/components/ui/button';
-import { Card, CardContent } from '@/src/components/ui/card';
-import { Avatar } from '@/src/components/ui/avatar';
+import { Review } from '../../types';
+import { Button } from '../ui/button';
+import { Card, CardContent } from '../ui/card';
+import { Avatar } from '../ui/avatar';
 
 interface ReviewsListProps {
   reviews: Array<Review & {

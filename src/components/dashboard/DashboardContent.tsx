@@ -5,9 +5,9 @@ import { useUser } from '@clerk/nextjs';
 import TutorDashboard from './TutorDashboard';
 import StudentDashboard from './StudentDashboard';
 import DashboardSkeleton from './DashboardSkeleton';
-import { Card, CardContent } from '@/src/components/ui/card';
-import { Alert } from '@/src/components/ui/alert';
-import { Role, UserProfile, TutorProfile, StudentProfile, BookingStatus } from '@/src/types';
+import { Card, CardContent } from '../ui/card';
+import { Alert } from '../ui/alert';
+import { Role, UserProfile, TutorProfile, StudentProfile, BookingStatus } from '../../types';
 import { ActivityItem } from './RecentActivity';
 
 // Dashboard API response type

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Icons } from '@/src/lib/icons';
-import GoCoursLogo from '@/src/components/icons/GoCoursLogo';
+import { Icons } from '../../lib/icons';
+import GoCoursLogo from '../icons/GoCoursLogo';
 
 export default function Footer() {
   const navigation = {

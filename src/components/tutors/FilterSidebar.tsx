@@ -1,12 +1,12 @@
 "use client";
 
 import React from 'react';
-import { Subject, AllSubjects, AllTeachingFormats, AllLanguages } from '@/src/types';
-import { Button } from '@/src/components/ui/button';
-import { Input } from '@/src/components/ui/input';
-import { Label } from '@/src/components/ui/label';
-import { Select } from '@/src/components/ui/select';
-import { Card, CardContent, CardHeader } from '@/src/components/ui/card';
+import { Subject, AllSubjects, AllTeachingFormats, AllLanguages } from '../../types';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { Select } from '../ui/select';
+import { Card, CardContent, CardHeader } from '../ui/card';
 
 export interface FilterState {
   subjects: Subject[];

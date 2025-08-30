@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { TutorProfile } from '@/src/types';
-import { Card, CardContent, CardFooter, CardHeader } from '@/src/components/ui/card';
-import { Avatar } from '@/src/components/ui/avatar';
-import { Button } from '@/src/components/ui/button';
-import { Badge } from '@/src/components/ui/badge';
+import { TutorProfile } from '../../types';
+import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
+import { Avatar } from '../ui/avatar';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 
 interface TutorCardProps {
   tutor: TutorProfile & {

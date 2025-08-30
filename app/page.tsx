@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { Button } from '@/src/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
-import { Input } from '@/src/components/ui/input';
-import { Icons } from '@/src/lib/icons';
-import GoCoursLogo from '@/src/components/icons/GoCoursLogo';
+import { Button } from '../src/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../src/components/ui/card';
+import { Input } from '../src/components/ui/input';
+import { Icons } from '../src/lib/icons';
+import GoCoursLogo from '../src/components/icons/GoCoursLogo';
 import Image from 'next/image';
 
 const FeatureCard = ({ icon: Icon, title, description, link, linkText }: { icon: React.ElementType, title: string, description: string, link: string, linkText: string }) => (

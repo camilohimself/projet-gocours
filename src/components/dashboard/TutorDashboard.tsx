@@ -1,7 +1,7 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
-import { Button } from '@/src/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
 import StatsCards, { StatCardData } from './StatsCards';
 import RecentActivity, { ActivityItem } from './RecentActivity';
 import { 
@@ -12,7 +12,7 @@ import {
   BookOpen,
   MessageSquare
 } from 'lucide-react';
-import { TutorProfile, Booking, Review } from '@/src/types';
+import { TutorProfile, Booking, Review } from '../../types';
 
 type TutorDashboardData = {
   profile: TutorProfile;

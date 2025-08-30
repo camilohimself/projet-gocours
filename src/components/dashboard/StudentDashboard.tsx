@@ -1,8 +1,8 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
-import { Button } from '@/src/components/ui/button';
-import { Badge } from '@/src/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 import StatsCards, { StatCardData } from './StatsCards';
 import RecentActivity, { ActivityItem } from './RecentActivity';
 import { 
@@ -15,7 +15,7 @@ import {
   Star,
   Clock
 } from 'lucide-react';
-import { StudentProfile, Booking, TutorProfile, Favorite } from '@/src/types';
+import { StudentProfile, Booking, TutorProfile, Favorite } from '../../types';
 
 type StudentDashboardData = {
   profile: StudentProfile;

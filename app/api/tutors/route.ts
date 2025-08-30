@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
-import { TutorService } from '@/src/lib/prisma-helpers';
-import type { TutorSearchFilters, Subject } from '@/src/types';
+import { TutorService } from '../../../src/lib/prisma-helpers';
+import type { TutorSearchFilters, Subject } from '../../../src/types';
 
 export async function GET(request: NextRequest) {
   try {
